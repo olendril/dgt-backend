@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: Dofus Guild Tracker
+  description: Dofus Guild Tracker
+  version: 0.1.0
+servers:
+  - url: 'https'
+paths:
+  /ping:
+    get:
+      responses:
+        '200':
+          description: ping response
