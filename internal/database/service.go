@@ -21,5 +21,24 @@ func NewDatabase(conf config.DatabaseConfig) (*Database, error) {
 		return nil, err
 	}
 
-	return &Database{db: *db}, nil
+	database := Database{db: *db}
+
+	err = database.Migrate()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &database, nil
+}
+
+func (d *Database) Migrate() error {
+	err := d.db.AutoMigrate(&User{})
+
+	if err != nil {
+		log.Error().Err(err).Msg("Failed to migrate User")
+		return err
+	}
+
+	return nil
 }

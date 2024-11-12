@@ -7,6 +7,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
 
   db:
     image: postgres:17
