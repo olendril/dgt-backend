@@ -1,0 +1,6 @@
+# yaml-language-server: ...
+package: auth_api
+generate:
+  gin-server: true
+  models: true
+output: ./doc/auth/gen.go

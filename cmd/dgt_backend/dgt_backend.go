@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/olendril/dgt-backend/api"
+	auth_api "github.com/olendril/dgt-backend/doc/auth"
+	monitoring_api "github.com/olendril/dgt-backend/doc/monitoring"
+	"github.com/olendril/dgt-backend/internal/auth"
 	config "github.com/olendril/dgt-backend/internal/config"
 	"github.com/olendril/dgt-backend/internal/database"
+	"github.com/olendril/dgt-backend/internal/discord"
 	"github.com/olendril/dgt-backend/internal/monitoring"
 	"github.com/rs/zerolog/log"
 	"net/http"
@@ -13,7 +16,7 @@ import (
 
 func main() {
 	// create a type that satisfies the `api.ServerInterface`, which contains an implementation of every operation from the generated code
-	server := monitoring.NewServer()
+	monitoringServer := monitoring.NewServer()
 
 	conf, err := config.NewConfig()
 
@@ -24,7 +27,7 @@ func main() {
 		log.Info().Msg("Config loaded")
 	}
 
-	_, err = database.NewDatabase(conf.Database)
+	databaseService, err := database.NewDatabase(conf.Database)
 
 	if err != nil {
 		log.Error().Err(err).Msg("Error connecting to database")
@@ -33,9 +36,14 @@ func main() {
 		log.Info().Msg("Connected to database")
 	}
 
+	discordService := discord.NewDiscordService(conf.Discord)
+
 	r := gin.Default()
 
-	api.RegisterHandlers(r, server)
+	authServer := auth.NewService(discordService, *databaseService, conf.FrontendURL)
+
+	monitoring_api.RegisterHandlers(r, monitoringServer)
+	auth_api.RegisterHandlers(r, authServer)
 
 	s := &http.Server{
 		Handler: r,

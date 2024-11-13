@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Auth
+  description: Auth
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /login:
+    get:
+      responses:
+        '200':
+          description: The login link to redirect the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /redirect:
+    get:
+      responses:
+        '200':
+          description: The redirect from discord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectResponse'
+
+
+components:
+  schemas:
+    LoginResponse:
+      type: object
+      required:
+        - link
+      properties:
+        link:
+          type: string
+
+    RedirectResponse:
+      type: object
+      required:
+        - access_token
+        - expiration_date
+        - avatar_link
+        - username
+      properties:
+        access_token:
+          type: string
+        expiration_date:
+          type: string
+        avatar_link:
+          type: string
+        username:
+          type: string
+
+

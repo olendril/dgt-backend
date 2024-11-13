@@ -1,6 +1,6 @@
 # yaml-language-server: ...
-package: api
+package: monitoring_api
 generate:
   gin-server: true
   models: true
-output: api/gen.go
+output: ./doc/monitoring/gen.go

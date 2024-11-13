@@ -7,9 +7,10 @@ import (
 )
 
 type Config struct {
-	Port     int            `env:"PORT, default=8080"`
-	Database DatabaseConfig `env:", prefix=DATABASE_"`
-	Discord  DiscordConfig  `env:", prefix=DISCORD_"`
+	Port        int            `env:"PORT, default=8080"`
+	FrontendURL string         `env:"FRONTEND_URL, default=http://localhost:8080"`
+	Database    DatabaseConfig `env:", prefix=DATABASE_"`
+	Discord     DiscordConfig  `env:", prefix=DISCORD_"`
 }
 
 type DatabaseConfig struct {
@@ -21,9 +22,11 @@ type DatabaseConfig struct {
 }
 
 type DiscordConfig struct {
-	BaseUrl      string `env:"BASE_URL, default=https://discord.com/api/v0/api"`
+	BaseUrl      string `env:"BASE_URL, default=https://discord.com/api/v10"`
 	ClientID     string `env:"CLIENT_ID"`
 	ClientSecret string `env:"CLIENT_SECRET"`
+	Scopes       string `env:"SCOPES, default=identify"`
+	Redirect     string `env:"REDIRECT_URL, default=http://localhost:8080/redirect"`
 }
 
 func NewConfig() (*Config, error) {
