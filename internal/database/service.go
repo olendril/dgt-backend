@@ -40,5 +40,12 @@ func (d *Database) Migrate() error {
 		return err
 	}
 
+	err = d.db.AutoMigrate(&Guild{})
+
+	if err != nil {
+		log.Error().Err(err).Msg("Failed to migrate User")
+		return err
+	}
+
 	return nil
 }

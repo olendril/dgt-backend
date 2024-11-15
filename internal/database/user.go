@@ -13,6 +13,7 @@ type User struct {
 	RefreshToken string    `json:"refresh_token"`
 	DiscordID    string    `json:"discord_id"`
 	Expiration   time.Time `json:"expiration"`
+	Guilds       []Guild   `json:"guilds"`
 }
 
 func (d *Database) SearchUserByDiscordID(discordID string) (*User, error) {
@@ -22,6 +23,22 @@ func (d *Database) SearchUserByDiscordID(discordID string) (*User, error) {
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		log.Debug().Str("discordID", discordID).Msg("User Not Found")
+		return nil, nil
+	} else if result.Error != nil {
+		log.Error().Err(result.Error).Msg("Failed to search User")
+		return nil, result.Error
+	}
+
+	return &user, nil
+}
+
+func (d *Database) SearchUserByAccessToken(accessToken string) (*User, error) {
+	var user User
+
+	result := d.db.Where("access_token = ?", accessToken).First(&user)
+
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		log.Debug().Str("accessToken", accessToken).Msg("User Not Found")
 		return nil, nil
 	} else if result.Error != nil {
 		log.Error().Err(result.Error).Msg("Failed to search User")

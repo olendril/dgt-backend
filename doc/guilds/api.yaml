@@ -1,0 +1,121 @@
+openapi: 3.0.0
+info:
+  title: Guilds
+  description: Guilds
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /guilds:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuildInfo'
+      security:
+        - basicAuth: []
+      responses:
+        '201':
+          description: Guild created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      description: Get the owned guild of the user
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Guild owned by the user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuildResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    GuildInfo:
+      type: object
+      required:
+        - name
+        - server
+      properties:
+        name:
+          type: string
+        server:
+          type: string
+    GuildResponse:
+      type: object
+      required:
+        - name
+        - server
+        - code
+      properties:
+        name:
+          type: string
+        server:
+          type: string
+        code:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+

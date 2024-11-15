@@ -61,6 +61,33 @@ func (s Service) GetAccessToken(code string) (*GetAccessTokenResponse, error) {
 	return &response, nil
 }
 
+func (s Service) RefreshAccessToken(refreshToken string) (*GetAccessTokenResponse, error) {
+	post, err := s.client.R().
+		SetHeader("Content-Type", "application/x-www-form-urlencoded").
+		SetFormData(map[string]string{
+			"grant_type":    "refresh_token",
+			"refresh_token": refreshToken,
+			"redirect_uri":  s.conf.Redirect,
+			"client_id":     s.conf.ClientID,
+			"client_secret": s.conf.ClientSecret,
+		}).Post("https://discord.com/api/oauth2/token")
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error refreshing access token")
+		return nil, err
+	}
+
+	var response GetAccessTokenResponse
+
+	err = json.Unmarshal(post.Body(), &response)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+}
+
 type UserResponse struct {
 	ID         string `json:"id"`
 	Username   string `json:"username"`

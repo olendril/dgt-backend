@@ -1,0 +1,6 @@
+# yaml-language-server: ...
+package: guild_api
+generate:
+  gin-server: true
+  models: true
+output: ./doc/guilds/gen.go

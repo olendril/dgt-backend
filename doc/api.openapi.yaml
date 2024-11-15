@@ -14,3 +14,10 @@ paths:
     $ref: './auth/api.yaml#/paths/~1login'
   /redirect:
     $ref: './auth/api.yaml#/paths/~1redirect'
+  /refresh:
+    $ref: './auth/api.yaml#/paths/~1refresh'
+  /me:
+    $ref: './auth/api.yaml#/paths/~1me'
+  # Guild Enpoints
+  /guilds:
+    $ref: './guilds/api.yaml#/paths/~1guilds'

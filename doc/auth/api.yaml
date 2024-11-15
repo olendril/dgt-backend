@@ -18,15 +18,64 @@ paths:
   /redirect:
     get:
       responses:
+        '302':
+          description: The redirect from discord that will redirect to the frontend and set the cookie access_token
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: access_token=abcde12345; Path=/; HttpOnly
+        '500':
+          description: Internal Error when calling discord
+  /refresh:
+    get:
+      security:
+        - basicAuth: [] # <-- use the same name here
+      responses:
         '200':
-          description: The redirect from discord
+          description: Return new access token as a cookie
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: access_token=abcde12345; Path=/; HttpOnly
+  /me:
+    get:
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Get current logged user
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RedirectResponse'
+                $ref: '#/components/schemas/UserInfo'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
 
 components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: bearer
   schemas:
     LoginResponse:
       type: object
@@ -35,22 +84,21 @@ components:
       properties:
         link:
           type: string
-
-    RedirectResponse:
+    UserInfo:
       type: object
       required:
-        - access_token
-        - expiration_date
-        - avatar_link
         - username
+        - avatar
       properties:
-        access_token:
-          type: string
-        expiration_date:
-          type: string
-        avatar_link:
-          type: string
         username:
+          type: string
+        avatar:
+          type: string
+          example: https://cnd.discord.com/test.png
+    Error:
+      type: object
+      properties:
+        error:
           type: string
 
 

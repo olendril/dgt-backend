@@ -1,10 +1,12 @@
 package auth
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	authapi "github.com/olendril/dgt-backend/doc/auth"
 	"github.com/olendril/dgt-backend/internal/database"
 	"github.com/olendril/dgt-backend/internal/discord"
+	"github.com/olendril/dgt-backend/internal/utils"
 	"github.com/rs/zerolog/log"
 	"net/http"
 	"strconv"
@@ -97,8 +99,77 @@ func (s Service) GetRedirect(c *gin.Context) {
 		}
 	}
 
-	// avatarURL := fmt.Sprintf("https://cdn.discordapp.com/avatars/%s/%s.png", discordInfos.ID, discordInfos.Avatar)
-
 	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", "localhost", true, true)
 	c.Redirect(http.StatusFound, s.FrontendURL)
+}
+
+func (s Service) GetRefresh(c *gin.Context) {
+	oldToken := c.GetHeader("Authorization")
+
+	user, err := s.database.SearchUserByAccessToken(oldToken)
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error searching user")
+		c.JSON(500, gin.H{})
+		return
+	}
+
+	if user == nil {
+		c.JSON(404, gin.H{
+			"error": "User not found",
+		})
+		return
+	}
+
+	accessToken, err := s.discordClient.RefreshAccessToken(user.RefreshToken)
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error refreshing access token")
+		c.JSON(500, gin.H{
+			"error": "Error refreshing access token",
+		})
+		return
+	}
+
+	expiration, _ := time.ParseDuration(strconv.Itoa(accessToken.ExpiresIn) + "s")
+	expirationDate := time.Now().Add(expiration)
+
+	user.AccessToken = accessToken.AccessToken
+	user.RefreshToken = accessToken.RefreshToken
+	user.Expiration = expirationDate
+
+	err = s.database.UpdateUser(*user)
+	if err != nil {
+		log.Error().Err(err).Msg("Error updating user")
+		c.JSON(500, gin.H{})
+		return
+	}
+
+	c.SetCookie("access_token", accessToken.AccessToken, accessToken.ExpiresIn, "/", "localhost", true, true)
+	c.Redirect(http.StatusFound, s.FrontendURL)
+}
+
+func (s Service) GetMe(c *gin.Context) {
+	user, err := utils.CheckAuth(c, s.database)
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error when checking auth")
+		return
+	}
+
+	discordInfos, err := s.discordClient.GetUserInfo(user.AccessToken)
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error getting user info")
+		c.JSON(500, gin.H{
+			"error": "Error getting user info",
+		})
+	}
+
+	avatarURL := fmt.Sprintf("https://cdn.discordapp.com/avatars/%s/%s.png", discordInfos.ID, discordInfos.Avatar)
+
+	c.JSON(http.StatusOK, authapi.UserInfo{
+		Avatar:   avatarURL,
+		Username: discordInfos.Username,
+	})
 }
