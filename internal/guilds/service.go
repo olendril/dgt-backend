@@ -87,3 +87,27 @@ func (s Service) GetGuilds(c *gin.Context) {
 	c.JSON(200, responseGuilds)
 
 }
+
+func (s Service) GetGuildsId(c *gin.Context, id string) {
+	_, err := utils.CheckAuth(c, s.database)
+	if err != nil {
+		return
+	}
+
+	guild, err := s.database.FindGuildByID(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if guild == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "guild not found"})
+		return
+	}
+
+	guildResponse := guild_api.GuildResponse{
+		Code:   guild.Code,
+		Name:   guild.Name,
+		Server: guild.Server,
+	}
+
+	c.JSON(200, guildResponse)
+}

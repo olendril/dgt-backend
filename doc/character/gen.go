@@ -15,24 +15,24 @@ const (
 type CharacterInfo struct {
 	Class     string `json:"class"`
 	GuildCode string `json:"guild_code"`
-	Level     string `json:"level"`
+	Level     int    `json:"level"`
 	Name      string `json:"name"`
 	Server    string `json:"server"`
+}
+
+// CharacterResponse defines model for CharacterResponse.
+type CharacterResponse struct {
+	Achievements []string `json:"achievements"`
+	Class        string   `json:"class"`
+	GuildId      string   `json:"guild_id"`
+	Level        int      `json:"level"`
+	Name         string   `json:"name"`
+	Server       string   `json:"server"`
 }
 
 // Error defines model for Error.
 type Error struct {
 	Error *string `json:"error,omitempty"`
-}
-
-// GuildResponse defines model for GuildResponse.
-type GuildResponse struct {
-	Achievements []string `json:"achievements"`
-	Class        string   `json:"class"`
-	GuildId      string   `json:"guild_id"`
-	Level        string   `json:"level"`
-	Name         string   `json:"name"`
-	Server       string   `json:"server"`
 }
 
 // PostCharactersJSONRequestBody defines body for PostCharacters for application/json ContentType.

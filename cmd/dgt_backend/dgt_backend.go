@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	auth_api "github.com/olendril/dgt-backend/doc/auth"
+	character_api "github.com/olendril/dgt-backend/doc/character"
 	guild_api "github.com/olendril/dgt-backend/doc/guilds"
 	monitoring_api "github.com/olendril/dgt-backend/doc/monitoring"
 	"github.com/olendril/dgt-backend/internal/auth"
+	"github.com/olendril/dgt-backend/internal/characters"
 	config "github.com/olendril/dgt-backend/internal/config"
 	"github.com/olendril/dgt-backend/internal/database"
 	"github.com/olendril/dgt-backend/internal/discord"
@@ -46,9 +48,12 @@ func main() {
 
 	guildServer := guilds.NewServer(discordService, *databaseService)
 
+	characterServer := characters.NewServer(discordService, *databaseService)
+
 	monitoring_api.RegisterHandlers(r, monitoringServer)
 	auth_api.RegisterHandlers(r, authServer)
 	guild_api.RegisterHandlers(r, guildServer)
+	character_api.RegisterHandlers(r, characterServer)
 
 	s := &http.Server{
 		Handler: r,

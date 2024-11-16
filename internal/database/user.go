@@ -9,11 +9,12 @@ import (
 
 type User struct {
 	gorm.Model
-	AccessToken  string    `json:"access_token"`
-	RefreshToken string    `json:"refresh_token"`
-	DiscordID    string    `json:"discord_id"`
-	Expiration   time.Time `json:"expiration"`
-	Guilds       []Guild   `json:"guilds"`
+	AccessToken  string      `json:"access_token"`
+	RefreshToken string      `json:"refresh_token"`
+	DiscordID    string      `json:"discord_id"`
+	Expiration   time.Time   `json:"expiration"`
+	Guilds       []Guild     `json:"guilds"`
+	Characters   []Character `json:"characters"`
 }
 
 func (d *Database) SearchUserByDiscordID(discordID string) (*User, error) {

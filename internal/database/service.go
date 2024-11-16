@@ -47,5 +47,12 @@ func (d *Database) Migrate() error {
 		return err
 	}
 
+	err = d.db.AutoMigrate(&Character{})
+
+	if err != nil {
+		log.Error().Err(err).Msg("Failed to migrate Character")
+		return err
+	}
+
 	return nil
 }

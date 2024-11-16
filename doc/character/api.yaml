@@ -44,18 +44,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     get:
-      description: Get the owned guild of the user
+      description: Get the owned characters of the user
       security:
         - basicAuth: [ ]
       responses:
         '200':
-          description: Guild owned by the user
+          description: Character owned by the user
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GuildResponse'
+                  $ref: '#/components/schemas/CharacterResponse'
         '400':
           description: Bad Request
           content:
@@ -105,10 +105,10 @@ components:
         class:
           type: string
         level:
-          type: string
+          type: integer
         guild_code:
           type: string
-    GuildResponse:
+    CharacterResponse:
       type: object
       required:
         - name
@@ -125,7 +125,7 @@ components:
         class:
           type: string
         level:
-          type: string
+          type: integer
         guild_id:
           type: string
         achievements:

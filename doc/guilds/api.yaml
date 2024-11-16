@@ -15,7 +15,7 @@ paths:
             schema:
               $ref: '#/components/schemas/GuildInfo'
       security:
-        - basicAuth: []
+        - basicAuth: [ ]
       responses:
         '201':
           description: Guild created
@@ -80,8 +80,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-
+  /guilds/{id}:
+    get:
+      description: Get the guild of the user
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Guild requested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuildResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   securitySchemes:
