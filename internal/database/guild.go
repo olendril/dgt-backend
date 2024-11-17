@@ -45,8 +45,12 @@ func (d *Database) FindGuildByCode(code string) (*Guild, error) {
 	result := d.db.Where("code = ?", code).First(&guild)
 
 	if result.Error != nil {
-		log.Error().Err(result.Error).Msg("Failed to fetch Guild")
-		return nil, errors.New("internal server error when fetching guild")
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		} else {
+			log.Error().Err(result.Error).Msg("Failed to fetch Guild")
+			return nil, errors.New("internal server error when fetching guild")
+		}
 	}
 
 	return &guild, nil
@@ -59,8 +63,12 @@ func (d *Database) FindGuildByID(id string) (*Guild, error) {
 	result := d.db.Where("id = ?", id).First(&guild)
 
 	if result.Error != nil {
-		log.Error().Err(result.Error).Msg("Failed to fetch Guild")
-		return nil, errors.New("internal server error when fetching guild")
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		} else {
+			log.Error().Err(result.Error).Msg("Failed to fetch Guild")
+			return nil, errors.New("internal server error when fetching guild")
+		}
 	}
 
 	return &guild, nil

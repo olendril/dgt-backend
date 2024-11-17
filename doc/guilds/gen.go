@@ -29,6 +29,7 @@ type GuildInfo struct {
 // GuildResponse defines model for GuildResponse.
 type GuildResponse struct {
 	Code   string `json:"code"`
+	Id     string `json:"id"`
 	Name   string `json:"name"`
 	Server string `json:"server"`
 }

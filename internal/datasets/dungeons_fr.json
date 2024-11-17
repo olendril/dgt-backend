@@ -1,0 +1,12 @@
+{
+  "kardorim1": {
+    "name": "Crypte de Kardorim",
+    "dungeon": "Crypte de Kardorim",
+    "level": 10
+  },
+  "kardorim2": {
+    "name": "Zombie",
+    "dungeon": "Crypte de Kardorim",
+    "level": 10
+  }
+}

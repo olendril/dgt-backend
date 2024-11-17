@@ -1,0 +1,6 @@
+# yaml-language-server: ...
+package: success_api
+generate:
+  gin-server: true
+  models: true
+output: ./doc/success/gen.go

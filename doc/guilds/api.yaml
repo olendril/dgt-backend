@@ -110,7 +110,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
-          description: User not found
+          description: Guild not found
           content:
             application/json:
               schema:
@@ -144,7 +144,10 @@ components:
         - name
         - server
         - code
+        - id
       properties:
+        id:
+          type: string
         name:
           type: string
         server:

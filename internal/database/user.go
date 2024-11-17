@@ -36,7 +36,7 @@ func (d *Database) SearchUserByDiscordID(discordID string) (*User, error) {
 func (d *Database) SearchUserByAccessToken(accessToken string) (*User, error) {
 	var user User
 
-	result := d.db.Where("access_token = ?", accessToken).First(&user)
+	result := d.db.Where("access_token = ?", accessToken).Preload("Characters").Preload("Guilds").First(&user)
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		log.Debug().Str("accessToken", accessToken).Msg("User Not Found")

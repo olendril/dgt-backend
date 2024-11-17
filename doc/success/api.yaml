@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Guilds
+  description: Guilds
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /success/dungeons:
+    get:
+      description: Get the list of dungeon success
+      responses:
+        '200':
+          description: List of dungeon success available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DungeonSuccessMap'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    DungeonSuccessMap: # <---- dictionary
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/DungeonSuccess"
+    DungeonSuccess:
+      type: object
+      required:
+        - name
+        - dungeon
+        - level
+      properties:
+        name:
+          type: string
+        dungeon:
+          type: string
+        level:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+
+

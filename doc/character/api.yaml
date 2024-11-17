@@ -80,6 +80,94 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /characters/{id}:
+    get:
+      description: Get the character from it's id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Character requested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /characters/{id}/success/{successID}:
+    post:
+      description: Add a success
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+        - name: successID
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Success added
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Character doesn't belong to user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 
 
@@ -115,9 +203,12 @@ components:
         - server
         - class
         - level
-        - achievements
+        - dungeon_success
         - guild_id
+        - id
       properties:
+        id:
+          type: string
         name:
           type: string
         server:
@@ -128,7 +219,7 @@ components:
           type: integer
         guild_id:
           type: string
-        achievements:
+        dungeon_success:
           type: array
           items:
             type: string

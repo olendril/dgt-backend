@@ -4,7 +4,11 @@
 package character_api
 
 import (
+	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
+	"github.com/oapi-codegen/runtime"
 )
 
 const (
@@ -22,12 +26,13 @@ type CharacterInfo struct {
 
 // CharacterResponse defines model for CharacterResponse.
 type CharacterResponse struct {
-	Achievements []string `json:"achievements"`
-	Class        string   `json:"class"`
-	GuildId      string   `json:"guild_id"`
-	Level        int      `json:"level"`
-	Name         string   `json:"name"`
-	Server       string   `json:"server"`
+	Class          string   `json:"class"`
+	DungeonSuccess []string `json:"dungeon_success"`
+	GuildId        string   `json:"guild_id"`
+	Id             string   `json:"id"`
+	Level          int      `json:"level"`
+	Name           string   `json:"name"`
+	Server         string   `json:"server"`
 }
 
 // Error defines model for Error.
@@ -46,6 +51,12 @@ type ServerInterface interface {
 
 	// (POST /characters)
 	PostCharacters(c *gin.Context)
+
+	// (GET /characters/{id})
+	GetCharactersId(c *gin.Context, id string)
+
+	// (POST /characters/{id}/success/{successID})
+	PostCharactersIdSuccessSuccessID(c *gin.Context, id string, successID string)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -87,6 +98,67 @@ func (siw *ServerInterfaceWrapper) PostCharacters(c *gin.Context) {
 	siw.Handler.PostCharacters(c)
 }
 
+// GetCharactersId operation middleware
+func (siw *ServerInterfaceWrapper) GetCharactersId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetCharactersId(c, id)
+}
+
+// PostCharactersIdSuccessSuccessID operation middleware
+func (siw *ServerInterfaceWrapper) PostCharactersIdSuccessSuccessID(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Path parameter "successID" -------------
+	var successID string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "successID", c.Param("successID"), &successID, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter successID: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostCharactersIdSuccessSuccessID(c, id, successID)
+}
+
 // GinServerOptions provides options for the Gin server.
 type GinServerOptions struct {
 	BaseURL      string
@@ -116,4 +188,6 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 
 	router.GET(options.BaseURL+"/characters", wrapper.GetCharacters)
 	router.POST(options.BaseURL+"/characters", wrapper.PostCharacters)
+	router.GET(options.BaseURL+"/characters/:id", wrapper.GetCharactersId)
+	router.POST(options.BaseURL+"/characters/:id/success/:successID", wrapper.PostCharactersIdSuccessSuccessID)
 }

@@ -3,16 +3,18 @@ package database
 import (
 	"fmt"
 	"github.com/olendril/dgt-backend/internal/config"
+	"github.com/olendril/dgt-backend/internal/datasets"
 	"github.com/rs/zerolog/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 type Database struct {
-	db gorm.DB
+	db   gorm.DB
+	data datasets.Service
 }
 
-func NewDatabase(conf config.DatabaseConfig) (*Database, error) {
+func NewDatabase(conf config.DatabaseConfig, data datasets.Service) (*Database, error) {
 	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", conf.User, conf.Password, conf.Host, conf.Port, conf.Name)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -21,7 +23,10 @@ func NewDatabase(conf config.DatabaseConfig) (*Database, error) {
 		return nil, err
 	}
 
-	database := Database{db: *db}
+	database := Database{
+		db:   *db,
+		data: data,
+	}
 
 	err = database.Migrate()
 

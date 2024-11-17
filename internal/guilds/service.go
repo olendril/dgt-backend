@@ -8,6 +8,7 @@ import (
 	"github.com/olendril/dgt-backend/internal/discord"
 	"github.com/olendril/dgt-backend/internal/utils"
 	"net/http"
+	"strconv"
 )
 
 type Service struct {
@@ -78,6 +79,7 @@ func (s Service) GetGuilds(c *gin.Context) {
 
 	for _, value := range *guilds {
 		responseGuilds = append(responseGuilds, guild_api.GuildResponse{
+			Id:     strconv.Itoa(int(value.ID)),
 			Code:   value.Code,
 			Name:   value.Name,
 			Server: value.Server,
@@ -104,6 +106,7 @@ func (s Service) GetGuildsId(c *gin.Context, id string) {
 	}
 
 	guildResponse := guild_api.GuildResponse{
+		Id:     strconv.Itoa(int(guild.ID)),
 		Code:   guild.Code,
 		Name:   guild.Name,
 		Server: guild.Server,
