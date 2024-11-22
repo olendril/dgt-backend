@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	auth_api "github.com/olendril/dgt-backend/doc/auth"
 	character_api "github.com/olendril/dgt-backend/doc/character"
@@ -54,6 +55,11 @@ func main() {
 	discordService := discord.NewDiscordService(conf.Discord)
 
 	r := gin.Default()
+
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowHeaders = append(corsConfig.AllowHeaders, "Authorization")
+	corsConfig.AllowOrigins = []string{"http://localhost:5173"}
+	r.Use(cors.New(corsConfig))
 
 	authServer := auth.NewService(discordService, *databaseService, conf.FrontendURL)
 

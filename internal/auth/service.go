@@ -99,7 +99,7 @@ func (s Service) GetRedirect(c *gin.Context) {
 		}
 	}
 
-	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", "localhost", true, true)
+	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", "localhost", false, false)
 	c.Redirect(http.StatusFound, s.FrontendURL)
 }
 
