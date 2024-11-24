@@ -40,8 +40,14 @@ type Error struct {
 	Error *string `json:"error,omitempty"`
 }
 
+// PutCharactersIdSuccessDungeonsJSONBody defines parameters for PutCharactersIdSuccessDungeons.
+type PutCharactersIdSuccessDungeonsJSONBody = []string
+
 // PostCharactersJSONRequestBody defines body for PostCharacters for application/json ContentType.
 type PostCharactersJSONRequestBody = CharacterInfo
+
+// PutCharactersIdSuccessDungeonsJSONRequestBody defines body for PutCharactersIdSuccessDungeons for application/json ContentType.
+type PutCharactersIdSuccessDungeonsJSONRequestBody = PutCharactersIdSuccessDungeonsJSONBody
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
@@ -54,6 +60,9 @@ type ServerInterface interface {
 
 	// (GET /characters/{id})
 	GetCharactersId(c *gin.Context, id string)
+
+	// (PUT /characters/{id}/success/dungeons)
+	PutCharactersIdSuccessDungeons(c *gin.Context, id string)
 
 	// (POST /characters/{id}/success/{successID})
 	PostCharactersIdSuccessSuccessID(c *gin.Context, id string, successID string)
@@ -124,6 +133,32 @@ func (siw *ServerInterfaceWrapper) GetCharactersId(c *gin.Context) {
 	siw.Handler.GetCharactersId(c, id)
 }
 
+// PutCharactersIdSuccessDungeons operation middleware
+func (siw *ServerInterfaceWrapper) PutCharactersIdSuccessDungeons(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PutCharactersIdSuccessDungeons(c, id)
+}
+
 // PostCharactersIdSuccessSuccessID operation middleware
 func (siw *ServerInterfaceWrapper) PostCharactersIdSuccessSuccessID(c *gin.Context) {
 
@@ -189,5 +224,6 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/characters", wrapper.GetCharacters)
 	router.POST(options.BaseURL+"/characters", wrapper.PostCharacters)
 	router.GET(options.BaseURL+"/characters/:id", wrapper.GetCharactersId)
+	router.PUT(options.BaseURL+"/characters/:id/success/dungeons", wrapper.PutCharactersIdSuccessDungeons)
 	router.POST(options.BaseURL+"/characters/:id/success/:successID", wrapper.PostCharactersIdSuccessSuccessID)
 }

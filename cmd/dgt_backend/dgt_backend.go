@@ -58,7 +58,7 @@ func main() {
 
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowHeaders = append(corsConfig.AllowHeaders, "Authorization")
-	corsConfig.AllowOrigins = []string{"http://localhost:5173"}
+	corsConfig.AllowAllOrigins = true
 	r.Use(cors.New(corsConfig))
 
 	authServer := auth.NewService(discordService, *databaseService, conf.FrontendURL)

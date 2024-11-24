@@ -114,3 +114,7 @@ func (s Service) GetGuildsId(c *gin.Context, id string) {
 
 	c.JSON(200, guildResponse)
 }
+
+func (s Service) GetGuildsIdCharacters(c *gin.Context, id string) {
+	c.JSON(501, gin.H{})
+}

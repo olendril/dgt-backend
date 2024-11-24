@@ -31,6 +31,17 @@ func (d *Database) CreateCharacter(character Character) error {
 	return nil
 }
 
+func (d *Database) UpdateCharacter(character Character) error {
+	result := d.db.Save(&character)
+
+	if result.Error != nil {
+		log.Error().Err(result.Error).Msg("Failed to save Character")
+		return errors.New("internal server error when updating Character")
+	}
+
+	return nil
+}
+
 func (d *Database) GetOwnedCharacters(owner User) (*[]Character, error) {
 
 	result := d.db.Preload("Characters").First(&owner)

@@ -1,12 +1,343 @@
 {
-  "kardorim1": {
+  "kardorim": {
     "name": "Crypte de Kardorim",
-    "dungeon": "Crypte de Kardorim",
-    "level": 10
+    "level": 10,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
   },
-  "kardorim2": {
-    "name": "Zombie",
-    "dungeon": "Crypte de Kardorim",
-    "level": 10
+  "tournesol": {
+    "name": "Grange du Tournesol Affamé",
+    "level": 20,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ensable": {
+    "name": "Château Ensablé",
+    "level": 20,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "bouftou": {
+    "name": "Cour du Bouftou Royal",
+    "level": 30,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "scarafeuille": {
+    "name": "Donjon des Scarafeuilles",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "mainspropre": "Mains propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "batofu": {
+    "name": "Donjon des Tofus",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "boostache": {
+    "name": "Maison Fantôme",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "squelette": {
+    "name": "Donjon des Squelettes",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kankreblath": {
+    "name": "Cache de Kankreblath",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "gunob": {
+    "name": "Akadémie des Gobs",
+    "level": 40,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "bworkette": {
+    "name": "Donjon des Bworks",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "forgeron": {
+    "name": "Donjon des Forgerons",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "shinlarve": {
+    "name": "Donjon des Larves",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "grottehesque": {
+    "name": "Grotte Hesque",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kwakwa": {
+    "name": "Nid de Kwakwa",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "mainspropre": "Mains propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "rakoopeur": {
+    "name": "Refuge Sylvestre",
+    "level": 50,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "wawabbit": {
+    "name": "Château du Wa Wabbit",
+    "level": 60,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kanniboul": {
+    "name": "Village Kanniboul",
+    "level": 60,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "blop": {
+    "name": "Clos des Blops",
+    "level": 60,
+    "success": {
+      "simple": "Simple",
+      "duel": "Duel",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "gelax": {
+    "name": "Gelaxième Dimension",
+    "level": 60,
+    "success": {
+      "simple": "Simple",
+      "duel": "Duel",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "nelween": {
+    "name": "Laboratoire de Brumen Tinctorias",
+    "level": 70,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "misanthrope": "Misanthrope",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "gourlo": {
+    "name": "Cale de l'Arche d'Otomaï",
+    "level": 70,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "econome": "Économe",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "craqueleur": {
+    "name": "Pitons Rocheux des Craqueleurs",
+    "level": 70,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "draegnerys": {
+    "name": "Épreuve de Draegnerys",
+    "level": 70,
+    "success": {
+      "simple": "Simple",
+      "focus": "Focus",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "wawobot": {
+    "name": "Terrier du Wa Wabbit",
+    "level": 80,
+    "success": {
+      "simple": "Simple",
+      "mainspropres": "Mains Propres",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "mantiscore": {
+    "name": "Cimetière des Mastodontes",
+    "level": 80,
+    "success": {
+      "simple": "Simple",
+      "mainspropres": "Mains Propres",
+      "zombie": "Zombie",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "reinenyee": {
+    "name": "Antre de la Reine Nyée",
+    "level": 90,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "abraknyde": {
+    "name": "Domaine Ancestral",
+    "level": 90,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "chouque": {
+    "name": "Bateau du Chouque",
+    "level": 90,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "nomade": "Nomade",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "choudini": {
+    "name": "Chapiteau des Magik Riktus",
+    "level": 90,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "dragoncochon": {
+    "name": "Antre du Dragon Cochon",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
   }
 }

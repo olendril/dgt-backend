@@ -6,12 +6,15 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strings"
 )
 
+type DungeonSuccessArray []DungeonSuccess
+
 type DungeonSuccess struct {
-	Name    string `json:"name"`
-	Dungeon string `json:"dungeon"`
-	Level   int    `json:"level"`
+	Name    string            `json:"name"`
+	Level   int               `json:"level"`
+	Success map[string]string `json:"success"`
 }
 
 type Service struct {
@@ -40,12 +43,24 @@ func NewService() (*Service, error) {
 }
 
 func (s Service) GetDungeonSuccess(id string) (*DungeonSuccess, error) {
-	val, ok := s.dungeons[id]
+	tmp := strings.Split(id, "-")
+
+	// The id must be in format dungeon-success
+	if len(tmp) != 2 {
+		return nil, errors.New("invalid id")
+	}
+
+	dungeon, ok := s.dungeons[tmp[0]]
+	if !ok {
+		return nil, errors.New("dungeon not found")
+	}
+
+	_, ok = dungeon.Success[tmp[1]]
 	if !ok {
 		return nil, errors.New("success not found")
 	}
 
-	return &val, nil
+	return &dungeon, nil
 }
 
 func (s Service) GetSuccessDungeons(c *gin.Context) {

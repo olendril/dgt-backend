@@ -48,6 +48,9 @@ type ServerInterface interface {
 
 	// (GET /guilds/{id})
 	GetGuildsId(c *gin.Context, id string)
+
+	// (GET /guilds/{id}/characters)
+	GetGuildsIdCharacters(c *gin.Context, id string)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -115,6 +118,32 @@ func (siw *ServerInterfaceWrapper) GetGuildsId(c *gin.Context) {
 	siw.Handler.GetGuildsId(c, id)
 }
 
+// GetGuildsIdCharacters operation middleware
+func (siw *ServerInterfaceWrapper) GetGuildsIdCharacters(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetGuildsIdCharacters(c, id)
+}
+
 // GinServerOptions provides options for the Gin server.
 type GinServerOptions struct {
 	BaseURL      string
@@ -145,4 +174,5 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/guilds", wrapper.GetGuilds)
 	router.POST(options.BaseURL+"/guilds", wrapper.PostGuilds)
 	router.GET(options.BaseURL+"/guilds/:id", wrapper.GetGuildsId)
+	router.GET(options.BaseURL+"/guilds/:id/characters", wrapper.GetGuildsIdCharacters)
 }

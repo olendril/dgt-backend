@@ -7,15 +7,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// DungeonSuccess defines model for DungeonSuccess.
-type DungeonSuccess struct {
-	Dungeon string `json:"dungeon"`
-	Level   int    `json:"level"`
-	Name    string `json:"name"`
+// Dungeon defines model for Dungeon.
+type Dungeon struct {
+	Level   int                `json:"level"`
+	Name    string             `json:"name"`
+	Success *map[string]string `json:"success,omitempty"`
 }
 
 // DungeonSuccessMap defines model for DungeonSuccessMap.
-type DungeonSuccessMap map[string]DungeonSuccess
+type DungeonSuccessMap map[string]Dungeon
 
 // Error defines model for Error.
 type Error struct {
