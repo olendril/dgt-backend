@@ -49,6 +49,22 @@ func (d *Database) SearchUserByAccessToken(accessToken string) (*User, error) {
 	return &user, nil
 }
 
+func (d *Database) FindUserByID(idUser uint) (*User, error) {
+	var user User
+
+	result := d.db.Where("id = ?", idUser).First(&user)
+
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		log.Debug().Uint("iduser", idUser).Msg("User Not Found")
+		return nil, nil
+	} else if result.Error != nil {
+		log.Error().Err(result.Error).Msg("Failed to search User")
+		return nil, result.Error
+	}
+
+	return &user, nil
+}
+
 func (d *Database) CreateUser(user User) error {
 	result := d.db.Create(&user)
 

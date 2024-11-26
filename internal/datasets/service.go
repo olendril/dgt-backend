@@ -63,6 +63,22 @@ func (s Service) GetDungeonSuccess(id string) (*DungeonSuccess, error) {
 	return &dungeon, nil
 }
 
+func (s Service) GetSuccessFromDungeons(id string) ([]string, error) {
+
+	dungeon, ok := s.dungeons[id]
+	if !ok {
+		return nil, errors.New("dungeon not found")
+	}
+
+	var ids []string
+
+	for key, _ := range dungeon.Success {
+		ids = append(ids, key)
+	}
+
+	return ids, nil
+}
+
 func (s Service) GetSuccessDungeons(c *gin.Context) {
 	c.JSON(http.StatusOK, s.dungeons)
 }

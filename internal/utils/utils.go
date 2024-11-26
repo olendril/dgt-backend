@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/olendril/dgt-backend/internal/database"
+	"github.com/rs/zerolog/log"
 	"strings"
 	"time"
 )
@@ -42,4 +43,20 @@ func extractToken(c *gin.Context) string {
 		return strings.Split(bearerToken, " ")[1]
 	}
 	return ""
+}
+
+func ExtractDungeonSuccess(dungeon string, successList []string) []string {
+	var responseSuccess []string
+	log.Info().Interface("dungeon", dungeon).Msg("Dungeon success")
+	for _, success := range successList {
+		tmp := strings.Split(success, "-")
+		log.Info().Interface("success", tmp).Msg("Dungeon success")
+		if len(tmp) == 1 {
+			return []string{}
+		}
+		if tmp[0] == dungeon {
+			responseSuccess = append(responseSuccess, success)
+		}
+	}
+	return responseSuccess
 }

@@ -4,23 +4,27 @@ import (
 	"github.com/gin-gonic/gin"
 	character_api "github.com/olendril/dgt-backend/doc/character"
 	"github.com/olendril/dgt-backend/internal/database"
+	"github.com/olendril/dgt-backend/internal/datasets"
 	"github.com/olendril/dgt-backend/internal/discord"
 	"github.com/olendril/dgt-backend/internal/utils"
 	"github.com/rs/zerolog/log"
 	"net/http"
 	"slices"
 	"strconv"
+	"strings"
 )
 
 type Service struct {
 	db      database.Database
 	discord discord.Service
+	data    datasets.Service
 }
 
-func NewServer(discordClient discord.Service, database database.Database) Service {
+func NewServer(discordClient discord.Service, database database.Database, data datasets.Service) Service {
 	return Service{
 		discord: discordClient,
 		db:      database,
+		data:    data,
 	}
 }
 
@@ -220,4 +224,81 @@ func (s Service) PutCharactersIdSuccessDungeons(c *gin.Context, id string) {
 	}
 
 	c.JSON(200, gin.H{})
+}
+
+func (s Service) GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context, dungeonID string) {
+	user, err := utils.CheckAuth(c, s.db)
+	if err != nil {
+		return
+	}
+
+	dungeonSuccess, err := s.data.GetSuccessFromDungeons(dungeonID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	guildsUser, err := s.db.FindGuildsUser(user.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	characters, err := s.db.GetCharacterOfGuilds(guildsUser)
+	if err != nil {
+		return
+	}
+
+	var charactersResponse []character_api.SearchResponse
+
+	for _, character := range characters {
+		var missingSuccess []string
+
+		for i := 0; i < len(dungeonSuccess); i++ {
+
+			tmpSuccess := utils.ExtractDungeonSuccess(dungeonID, character.DungeonsSuccess)
+			idx := slices.IndexFunc(tmpSuccess, func(success string) bool {
+				tmp := strings.Split(success, "-")
+				return tmp[1] == dungeonSuccess[i]
+			})
+			if idx == -1 {
+				missingSuccess = append(missingSuccess, dungeonSuccess[i])
+			}
+		}
+
+		// If user has all the success it is not returned
+		if len(missingSuccess) < 1 {
+			continue
+		}
+
+		user, err := s.db.FindUserByID(character.UserID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		info, err := s.discord.GetUserInfo(user.AccessToken)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		idxGuild := slices.IndexFunc(guildsUser, func(guild database.Guild) bool { return guild.ID == character.GuildID })
+
+		characterTmp := character_api.SearchResponse{
+			CharacterId:    strconv.Itoa(int(character.ID)),
+			CharacterName:  character.Name,
+			Class:          character.Class,
+			DiscordName:    info.Username,
+			GuildId:        strconv.Itoa(int(character.GuildID)),
+			GuildName:      guildsUser[idxGuild].Name,
+			Level:          int(character.Level),
+			MissingSuccess: missingSuccess,
+		}
+
+		charactersResponse = append(charactersResponse, characterTmp)
+	}
+
+	c.JSON(http.StatusOK, charactersResponse)
 }

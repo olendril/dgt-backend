@@ -65,7 +65,7 @@ func main() {
 
 	guildServer := guilds.NewServer(discordService, *databaseService)
 
-	characterServer := characters.NewServer(discordService, *databaseService)
+	characterServer := characters.NewServer(discordService, *databaseService, *datasetService)
 
 	monitoring_api.RegisterHandlers(r, monitoringServer)
 	auth_api.RegisterHandlers(r, authServer)

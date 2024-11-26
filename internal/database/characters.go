@@ -94,3 +94,21 @@ func (d *Database) AddDungeonSuccess(idSuccess string, character Character) erro
 
 	return nil
 }
+
+func (d *Database) GetCharacterOfGuilds(guilds []Guild) ([]Character, error) {
+	characters := []Character{}
+
+	for _, guild := range guilds {
+		charactersTmp := []Character{}
+
+		result := d.db.Where("guild_id = ?", guild.ID).Find(&charactersTmp)
+		if result.Error != nil {
+			log.Error().Err(result.Error).Msg("Failed to add dungeon success")
+			return nil, errors.New("internal server error when getting dungeon success")
+		}
+
+		characters = append(characters, charactersTmp...)
+	}
+
+	return characters, nil
+}

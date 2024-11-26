@@ -73,3 +73,22 @@ func (d *Database) FindGuildByID(id string) (*Guild, error) {
 
 	return &guild, nil
 }
+
+func (d *Database) FindGuildsUser(userID uint) ([]Guild, error) {
+	var guilds []Guild
+
+	result := d.db.Joins("JOIN characters c on c.user_id = ?", userID).Joins("JOIN guilds as g on g.id = c.guild_id").Group("guilds.id").Find(&guilds)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		} else {
+			log.Error().Err(result.Error).Msg("Failed to fetch Guild")
+			return nil, errors.New("internal server error when fetching guild")
+		}
+	}
+
+	log.Info().Interface("guilds", guilds).Msg("Fetched Guilds")
+
+	return guilds, nil
+}

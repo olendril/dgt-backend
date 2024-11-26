@@ -220,6 +220,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /characters/success/dungeons/{dungeonID}/search:
+    get:
+      description: Get Character that are missing success of a dungeon
+      parameters:
+        - name: dungeonID
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Search done
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 
 
@@ -272,6 +309,36 @@ components:
         guild_id:
           type: string
         dungeon_success:
+          type: array
+          items:
+            type: string
+    SearchResponse:
+      type: object
+      required:
+        - character_name
+        - character_id
+        - discord_name
+        - class
+        - level
+        - missing_success
+        - guild_id
+        - guild_name
+      properties:
+        character_name:
+          type: string
+        character_id:
+          type: string
+        discord_name:
+          type: string
+        class:
+          type: string
+        level:
+          type: integer
+        guild_id:
+          type: string
+        guild_name:
+          type: string
+        missing_success:
           type: array
           items:
             type: string

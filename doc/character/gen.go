@@ -40,6 +40,18 @@ type Error struct {
 	Error *string `json:"error,omitempty"`
 }
 
+// SearchResponse defines model for SearchResponse.
+type SearchResponse struct {
+	CharacterId    string   `json:"character_id"`
+	CharacterName  string   `json:"character_name"`
+	Class          string   `json:"class"`
+	DiscordName    string   `json:"discord_name"`
+	GuildId        string   `json:"guild_id"`
+	GuildName      string   `json:"guild_name"`
+	Level          int      `json:"level"`
+	MissingSuccess []string `json:"missing_success"`
+}
+
 // PutCharactersIdSuccessDungeonsJSONBody defines parameters for PutCharactersIdSuccessDungeons.
 type PutCharactersIdSuccessDungeonsJSONBody = []string
 
@@ -57,6 +69,9 @@ type ServerInterface interface {
 
 	// (POST /characters)
 	PostCharacters(c *gin.Context)
+
+	// (GET /characters/success/dungeons/{dungeonID}/search)
+	GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context, dungeonID string)
 
 	// (GET /characters/{id})
 	GetCharactersId(c *gin.Context, id string)
@@ -105,6 +120,32 @@ func (siw *ServerInterfaceWrapper) PostCharacters(c *gin.Context) {
 	}
 
 	siw.Handler.PostCharacters(c)
+}
+
+// GetCharactersSuccessDungeonsDungeonIDSearch operation middleware
+func (siw *ServerInterfaceWrapper) GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "dungeonID" -------------
+	var dungeonID string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "dungeonID", c.Param("dungeonID"), &dungeonID, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter dungeonID: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.GetCharactersSuccessDungeonsDungeonIDSearch(c, dungeonID)
 }
 
 // GetCharactersId operation middleware
@@ -223,6 +264,7 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 
 	router.GET(options.BaseURL+"/characters", wrapper.GetCharacters)
 	router.POST(options.BaseURL+"/characters", wrapper.PostCharacters)
+	router.GET(options.BaseURL+"/characters/success/dungeons/:dungeonID/search", wrapper.GetCharactersSuccessDungeonsDungeonIDSearch)
 	router.GET(options.BaseURL+"/characters/:id", wrapper.GetCharactersId)
 	router.PUT(options.BaseURL+"/characters/:id/success/dungeons", wrapper.PutCharactersIdSuccessDungeons)
 	router.POST(options.BaseURL+"/characters/:id/success/:successID", wrapper.PostCharactersIdSuccessSuccessID)
