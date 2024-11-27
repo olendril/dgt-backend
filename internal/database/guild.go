@@ -26,6 +26,17 @@ func (d *Database) CreateGuild(guild Guild) error {
 	return nil
 }
 
+func (d *Database) DeleteGuild(guild Guild) error {
+	result := d.db.Delete(&guild)
+
+	if result.Error != nil {
+		log.Error().Err(result.Error).Msg("Failed to delete Guild")
+		return errors.New("internal server error when deleting guild")
+	}
+
+	return nil
+}
+
 func (d *Database) GetOwnedGuilds(owner User) (*[]Guild, error) {
 
 	result := d.db.Preload("Guilds").First(&owner)

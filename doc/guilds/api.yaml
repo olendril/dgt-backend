@@ -121,6 +121,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete the guild from it's id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Character deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Character doesn't belong to user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /guilds/{id}/characters:
     get:
       description: Get the characters present in a guild

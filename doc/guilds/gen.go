@@ -46,6 +46,9 @@ type ServerInterface interface {
 	// (POST /guilds)
 	PostGuilds(c *gin.Context)
 
+	// (DELETE /guilds/{id})
+	DeleteGuildsId(c *gin.Context, id string)
+
 	// (GET /guilds/{id})
 	GetGuildsId(c *gin.Context, id string)
 
@@ -90,6 +93,32 @@ func (siw *ServerInterfaceWrapper) PostGuilds(c *gin.Context) {
 	}
 
 	siw.Handler.PostGuilds(c)
+}
+
+// DeleteGuildsId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteGuildsId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteGuildsId(c, id)
 }
 
 // GetGuildsId operation middleware
@@ -173,6 +202,7 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 
 	router.GET(options.BaseURL+"/guilds", wrapper.GetGuilds)
 	router.POST(options.BaseURL+"/guilds", wrapper.PostGuilds)
+	router.DELETE(options.BaseURL+"/guilds/:id", wrapper.DeleteGuildsId)
 	router.GET(options.BaseURL+"/guilds/:id", wrapper.GetGuildsId)
 	router.GET(options.BaseURL+"/guilds/:id/characters", wrapper.GetGuildsIdCharacters)
 }

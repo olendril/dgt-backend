@@ -226,6 +226,49 @@ func (s Service) PutCharactersIdSuccessDungeons(c *gin.Context, id string) {
 	c.JSON(200, gin.H{})
 }
 
+func (s Service) PostCharactersIdLevelLevel(c *gin.Context, id string, level float32) {
+	user, err := utils.CheckAuth(c, s.db)
+	if err != nil {
+		return
+	}
+
+	character, err := s.db.FindCharacterByID(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if character == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "character not found"})
+		return
+	}
+
+	idParsed, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	log.Info().Interface("id", idParsed).Send()
+
+	key := slices.IndexFunc(user.Characters, func(s database.Character) bool {
+		return int(s.ID) == idParsed
+	})
+
+	if key < 0 {
+		c.JSON(http.StatusForbidden, gin.H{"error": "character doesn't belong to user"})
+	}
+
+	character.Level = uint(level)
+
+	err = s.db.UpdateCharacter(*character)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{})
+}
+
 func (s Service) GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context, dungeonID string) {
 	user, err := utils.CheckAuth(c, s.db)
 	if err != nil {
@@ -301,4 +344,45 @@ func (s Service) GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context, dun
 	}
 
 	c.JSON(http.StatusOK, charactersResponse)
+}
+
+func (s Service) DeleteCharactersId(c *gin.Context, id string) {
+	user, err := utils.CheckAuth(c, s.db)
+	if err != nil {
+		return
+	}
+
+	character, err := s.db.FindCharacterByID(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if character == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "character not found"})
+		return
+	}
+
+	idParsed, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	log.Info().Interface("id", idParsed).Send()
+
+	key := slices.IndexFunc(user.Characters, func(s database.Character) bool {
+		return int(s.ID) == idParsed
+	})
+
+	if key < 0 {
+		c.JSON(http.StatusForbidden, gin.H{"error": "character doesn't belong to user"})
+	}
+
+	err = s.db.DeleteCharacter(*character)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{})
 }

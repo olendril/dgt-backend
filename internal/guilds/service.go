@@ -7,7 +7,9 @@ import (
 	"github.com/olendril/dgt-backend/internal/database"
 	"github.com/olendril/dgt-backend/internal/discord"
 	"github.com/olendril/dgt-backend/internal/utils"
+	"github.com/rs/zerolog/log"
 	"net/http"
+	"slices"
 	"strconv"
 )
 
@@ -117,4 +119,45 @@ func (s Service) GetGuildsId(c *gin.Context, id string) {
 
 func (s Service) GetGuildsIdCharacters(c *gin.Context, id string) {
 	c.JSON(501, gin.H{})
+}
+
+func (s Service) DeleteGuildsId(c *gin.Context, id string) {
+	user, err := utils.CheckAuth(c, s.database)
+	if err != nil {
+		return
+	}
+
+	guild, err := s.database.FindGuildByID(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	} else if guild == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "guild not found"})
+		return
+	}
+
+	idParsed, err := strconv.Atoi(id)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	log.Info().Interface("id", idParsed).Send()
+
+	key := slices.IndexFunc(user.Guilds, func(s database.Guild) bool {
+		return int(s.ID) == idParsed
+	})
+
+	if key < 0 {
+		c.JSON(http.StatusForbidden, gin.H{"error": "guild doesn't belong to user"})
+	}
+
+	err = s.database.DeleteGuild(*guild)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{})
 }

@@ -73,8 +73,14 @@ type ServerInterface interface {
 	// (GET /characters/success/dungeons/{dungeonID}/search)
 	GetCharactersSuccessDungeonsDungeonIDSearch(c *gin.Context, dungeonID string)
 
+	// (DELETE /characters/{id})
+	DeleteCharactersId(c *gin.Context, id string)
+
 	// (GET /characters/{id})
 	GetCharactersId(c *gin.Context, id string)
+
+	// (POST /characters/{id}/level/{level})
+	PostCharactersIdLevelLevel(c *gin.Context, id string, level float32)
 
 	// (PUT /characters/{id}/success/dungeons)
 	PutCharactersIdSuccessDungeons(c *gin.Context, id string)
@@ -148,6 +154,32 @@ func (siw *ServerInterfaceWrapper) GetCharactersSuccessDungeonsDungeonIDSearch(c
 	siw.Handler.GetCharactersSuccessDungeonsDungeonIDSearch(c, dungeonID)
 }
 
+// DeleteCharactersId operation middleware
+func (siw *ServerInterfaceWrapper) DeleteCharactersId(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.DeleteCharactersId(c, id)
+}
+
 // GetCharactersId operation middleware
 func (siw *ServerInterfaceWrapper) GetCharactersId(c *gin.Context) {
 
@@ -172,6 +204,41 @@ func (siw *ServerInterfaceWrapper) GetCharactersId(c *gin.Context) {
 	}
 
 	siw.Handler.GetCharactersId(c, id)
+}
+
+// PostCharactersIdLevelLevel operation middleware
+func (siw *ServerInterfaceWrapper) PostCharactersIdLevelLevel(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "id", c.Param("id"), &id, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter id: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Path parameter "level" -------------
+	var level float32
+
+	err = runtime.BindStyledParameterWithOptions("simple", "level", c.Param("level"), &level, runtime.BindStyledParameterOptions{Explode: false, Required: false})
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter level: %w", err), http.StatusBadRequest)
+		return
+	}
+
+	c.Set(BasicAuthScopes, []string{})
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+		if c.IsAborted() {
+			return
+		}
+	}
+
+	siw.Handler.PostCharactersIdLevelLevel(c, id, level)
 }
 
 // PutCharactersIdSuccessDungeons operation middleware
@@ -265,7 +332,9 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/characters", wrapper.GetCharacters)
 	router.POST(options.BaseURL+"/characters", wrapper.PostCharacters)
 	router.GET(options.BaseURL+"/characters/success/dungeons/:dungeonID/search", wrapper.GetCharactersSuccessDungeonsDungeonIDSearch)
+	router.DELETE(options.BaseURL+"/characters/:id", wrapper.DeleteCharactersId)
 	router.GET(options.BaseURL+"/characters/:id", wrapper.GetCharactersId)
+	router.POST(options.BaseURL+"/characters/:id/level/:level", wrapper.PostCharactersIdLevelLevel)
 	router.PUT(options.BaseURL+"/characters/:id/success/dungeons", wrapper.PutCharactersIdSuccessDungeons)
 	router.POST(options.BaseURL+"/characters/:id/success/:successID", wrapper.PostCharactersIdSuccessSuccessID)
 }

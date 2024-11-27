@@ -121,6 +121,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete the character
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Character deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Character doesn't belong to user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /characters/{id}/success/{successID}:
     post:
       description: Add a success
@@ -133,6 +175,53 @@ paths:
           in: path
           schema:
             type: string
+      security:
+        - basicAuth: [ ]
+      responses:
+        '200':
+          description: Success added
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Token Expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Character doesn't belong to user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /characters/{id}/level/{level}:
+    post:
+      description: Change level of an user
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+        - name: level
+          in: path
+          schema:
+            type: number
       security:
         - basicAuth: [ ]
       responses:

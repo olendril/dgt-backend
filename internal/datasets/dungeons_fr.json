@@ -339,5 +339,954 @@
       "duo": "Duo",
       "special": "Spécial"
     }
+  },
+  "koulosse": {
+    "name": "Caverne du Koulosse",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "mainspropres": "Main propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "meulou": {
+    "name": "Tanière du Meulou",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "moon": {
+    "name": "Arbre de Moon",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "dramak": {
+    "name": "Théâtre de Dramak",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "mainspropres": "Mains Propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "malléfisk": {
+    "name": "Fabrique de Malléfisk",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "circulez": "Circulez",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kharnozor": {
+    "name": "Repaire du Kharnozor",
+    "level": 100,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "circulez": "Circulez",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "rasboul": {
+    "name": "Goulet du Rasboul",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "tempsquicourt": "Temps qui court",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "corbac": {
+    "name": "Bibliothèque du Maître Corbac",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ratblanc": {
+    "name": "Garde-manger du Rat Blanc",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ratnoir": {
+    "name": "Sousouricière du Rat Noir",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "blitzkrieg": "Blitzkrieg",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "pounicheur": {
+    "name": "Miausolée du Pounicheur",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "blitzkrieg": "Blitzkrieg",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "damadrya": {
+    "name": "Bambusaie de Damadrya",
+    "level": 110,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "bloproyal": {
+    "name": "Antre du Blop Multicolore Royal",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "duel": "Duel",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "minotoror": {
+    "name": "Centre du Labyrinthe du Minotoror",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "mainspropres": "Mains propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "royalmouth": {
+    "name": "Serre du Royalmouth",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "mainspropres": "Mains propres",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "tofuroyal": {
+    "name": "Tofulailler Royal",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "crocabulia": {
+    "name": "Antre de Crocabulia",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "skeunk": {
+    "name": "Repaire de Skeunk",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "fraktale": {
+    "name": "Mégalithe de Fraktale",
+    "level": 120,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "hautetruche": {
+    "name": "Volière de la Haute Truche",
+    "level": 130,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "barbare": "Barbare",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "elpiko": {
+    "name": "Caverne d'El Piko",
+    "level": 130,
+    "success": {
+      "simple": "Simple",
+      "blitzkrieg": "Blitzkrieg",
+      "duel": "duel",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ekarlatte": {
+    "name": "Ring du Capitaine Ekarlatte",
+    "level": 130,
+    "success": {
+      "simple": "Simple",
+      "focus": "Focus",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "nagate": {
+    "name": "Vallée de la Dame des eaux",
+    "level": 130,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "tanukouisan": {
+    "name": "Atelier du Tanukoï San",
+    "level": 130,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "versatile": "Versatile",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "chenemou": {
+    "name": "Clairière du Chêne Mou",
+    "level": 140,
+    "success": {
+      "simple": "Simple",
+      "liberte": "Liberté",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "tynrils": {
+    "name": "Laboratoire du Tynril",
+    "level": 140,
+    "success": {
+      "simple": "Simple",
+      "intouchable": "Intouchable",
+      "zombie": "Zombie",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "mansotroyal": {
+    "name": "Excavation du Mansot Royal",
+    "level": 140,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "hansishihan": {
+    "name": "Dojo du Vent",
+    "level": 140,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Liberté",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "founoroshi": {
+    "name": "Fabrique de foux d'artifice",
+    "level": 140,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "benleripate": {
+    "name": "Épave du Grolandais violent",
+    "level": 150,
+    "success": {
+      "simple": "Simple",
+      "circulez": "Circulez",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "sphinctercell": {
+    "name": "Repaire de Sphincter Cell",
+    "level": 150,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "phossile": {
+    "name": "Galerie du Phossile",
+    "level": 150,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "liberte": "Liberté",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "hellmina": {
+    "name": "Tertre du long sommeil",
+    "level": 150,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kimbo": {
+    "name": "Canopée du Kimbo",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "minotot": {
+    "name": "Salle du Minotot",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "circulez": "Circulez",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "obsidiantre": {
+    "name": "Hypogée de l'Obsidiantre",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kanigroula": {
+    "name": "Grotte de Kanigroula",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ushgalesh": {
+    "name": "Plateau de Ush",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "shoguntofugawa": {
+    "name": "Tombe du Shogun Tofugawa",
+    "level": 160,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "tengugivrefoux": {
+    "name": "Cavernes Givrefoux",
+    "level": 170,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "pèrever": {
+    "name": "Boyau du Père Ver",
+    "level": 170,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "xlii": {
+    "name": "Horologium de XLII",
+    "level": 170,
+    "success": {
+      "simple": "Simple",
+      "barbare": "Barbare",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "koumiho": {
+    "name": "Demeure des esprits",
+    "level": 170,
+    "success": {
+      "simple": "Simple",
+      "focus": "Focus",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "korriandre": {
+    "name": "Antre du Korriandre",
+    "level": 180,
+    "success": {
+      "simple": "Simple",
+      "mystique": "Mystique",
+      "zombie": "Zombie",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kralamoure": {
+    "name": "Antre du Kralamoure Géant",
+    "level": 180,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "bworker": {
+    "name": "Grotte du Bworker",
+    "level": 180,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ougah": {
+    "name": "Temple du Grand Ougah",
+    "level": 180,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "toxoliath": {
+    "name": "Cave du Toxoliath",
+    "level": 180,
+    "success": {
+      "simple": "Simple",
+      "circulez": "Circulez",
+      "misanthrope": "Misanthrope",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "kolosso": {
+    "name": "Cavernes du Kolosso",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "fujigivrefoux": {
+    "name": "Cavernes Nourricières",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "grolloum": {
+    "name": "Mine de Sakaï",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "blitzkrieg": "Blitzkrieg",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "glourséleste": {
+    "name": "Antichambre du Glourséleste",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ombre": {
+    "name": "Pyramide d'Ombre",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "razof": {
+    "name": "Camp du Comte Razof",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "liberte": "Liberté",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "barbéryl": {
+    "name": "Bastion des Marteaux-Aigris",
+    "level": 190,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "missizfrizz": {
+    "name": "Forgefroide de Missiz Frizz",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "nomade": "Nomade",
+      "collant": "Collant",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "sylargh": {
+    "name": "Transporteur de Sylargh",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "misanthrope": "Misanthrope",
+      "barbare": "Barbare",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "klime": {
+    "name": "Salons privés de Klime",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "nomade": "Nomade",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "nileza": {
+    "name": "Laboratoire de Nileza",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "harebourg": {
+    "name": "Donjon du Comte",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial",
+      "frizz": "Harebourg et Frizz",
+      "sylargh": "Harebourg et Sylargh",
+      "klime": "Harebourg et Klime",
+      "nileza": "Harebourg et Nileza"
+    }
+  },
+  "mrkator": {
+    "name": "Aquedôme de Merkator",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "mystique": "Mystique",
+      "dernier": "Dernier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "nidas": {
+    "name": "Palais du roi Nidas",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "statue": "Statue",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "reinedesvoleurs": {
+    "name": "Trône de la Cour Sombre",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "collant": "Collant",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "protozorreur": {
+    "name": "Ventre de la baleine",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "barbare": "Barbare",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "vortex": {
+    "name": "Oeil de Vortex",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "focus": "Focus",
+      "hardi": "Hardi",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "chaloeil": {
+    "name": "Défi du Chaloeil",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "liberte": "Liberté",
+      "prudent": "Prudent",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "capitainemeno": {
+    "name": "Vaisseau du Capitaine Meno",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "blitzkrieg": "Blitzkrieg",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "koutoulou": {
+    "name": "Temple de Koutoulou",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "hardi": "Hardi",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "dantinea": {
+    "name": "Palais de Dantinéa",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "talkasha": {
+    "name": "Chambre de Tal Kasha",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "statue": "Statue",
+      "focus": "Focus",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "katrepat": {
+    "name": "Anerice la Shushess",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "prudent": "Prudent",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "ilyzaelle": {
+    "name": "Belvédère d'Ilyzaelle",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "liberte": "Liberté",
+      "focus": "Focus",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "solar": {
+    "name": "Tour de Solar",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "focus": "Focus",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "bethelakarna": {
+    "name": "Tour de Bethel",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "mystique": "Mystique",
+      "zombie": "Zombie",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "dazakmartegel": {
+    "name": "Brasserie du roi Dazak",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "premier": "Premier",
+      "liberte": "Liberté",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "torkélonia": {
+    "name": "Sanctuaire de Torkélonia",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "dernier": "Dernier",
+      "statue": "Statue",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "corruption": {
+    "name": "Arbre de Mort",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "mainspropres": "Mains Propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "guerre": {
+    "name": "Trône de sang",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "misanthrope": "Misanthrope",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "servitude": {
+    "name": "Fers de la Tyrannie",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "versatile": "Versatile",
+      "focus": "Focus",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "misere": {
+    "name": "Sentence de la Balance",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "mainspropres": "Mains Propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "eliocalypse": {
+    "name": "Tempête de l'Eliocalypse",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "liberte": "Liberté",
+      "hardi": "Hardi",
+      "quator": "Quator"
+    }
+  },
+  "roiimagami": {
+    "name": "Mémoire d'Orukam",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "mainspropres": "Mains propres",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "reineamirukam": {
+    "name": "Souvenirs d'Imagiro",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "prudent": "Prudent",
+      "mainspropres": "Mains propres",
+      "trio": "Trio",
+      "special": "Spécial"
+    }
+  },
+  "kabahal": {
+    "name": "Rituel de Kabahal",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "hardi": "Hardi",
+      "mainspropres": "Mains propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "eternelconflit": {
+    "name": "Bataille de l'Aurore Pourpre",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "zombie": "Zombie",
+      "premier": "Premier",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
+  },
+  "belladone": {
+    "name": "Chambre des maléfices",
+    "level": 200,
+    "success": {
+      "simple": "Simple",
+      "collant": "Collant",
+      "mainspropres": "Mains propres",
+      "duo": "Duo",
+      "special": "Spécial"
+    }
   }
 }
