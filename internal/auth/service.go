@@ -17,13 +17,15 @@ type Service struct {
 	discordClient discord.Service
 	database      database.Database
 	FrontendURL   string
+	CookieDomain  string
 }
 
-func NewService(discordClient discord.Service, database database.Database, frontendURL string) *Service {
+func NewService(discordClient discord.Service, database database.Database, frontendURL string, cookieDomain string) *Service {
 	return &Service{
 		discordClient: discordClient,
 		database:      database,
 		FrontendURL:   frontendURL,
+		CookieDomain:  cookieDomain,
 	}
 }
 
@@ -99,7 +101,7 @@ func (s Service) GetRedirect(c *gin.Context) {
 		}
 	}
 
-	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", "localhost", false, false)
+	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", s.CookieDomain, false, false)
 	c.Redirect(http.StatusFound, s.FrontendURL)
 }
 
@@ -145,7 +147,7 @@ func (s Service) GetRefresh(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie("access_token", accessToken.AccessToken, accessToken.ExpiresIn, "/", "localhost", true, true)
+	c.SetCookie("access_token", accessToken.AccessToken, accessToken.ExpiresIn, "/", s.FrontendURL, true, true)
 	c.Redirect(http.StatusFound, s.FrontendURL)
 }
 

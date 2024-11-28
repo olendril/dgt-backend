@@ -61,7 +61,7 @@ func main() {
 	corsConfig.AllowAllOrigins = true
 	r.Use(cors.New(corsConfig))
 
-	authServer := auth.NewService(discordService, *databaseService, conf.FrontendURL)
+	authServer := auth.NewService(discordService, *databaseService, conf.FrontendURL, conf.CookieDomain)
 
 	guildServer := guilds.NewServer(discordService, *databaseService)
 
