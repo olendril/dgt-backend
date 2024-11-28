@@ -85,7 +85,17 @@ func (s Service) PostCharacters(c *gin.Context) {
 		return
 	}
 	if guild == nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Guild not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "guildNotFound"})
+		return
+	}
+
+	if requestBody.Level < 0 || requestBody.Level > 200 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "incorrectLevel"})
+		return
+	}
+
+	if requestBody.Name == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "nameEmpty"})
 		return
 	}
 
@@ -245,6 +255,11 @@ func (s Service) PostCharactersIdLevelLevel(c *gin.Context, id string, level flo
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if level < 0 || level > 200 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "level must be between 0 and 200"})
 		return
 	}
 
