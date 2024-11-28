@@ -24,7 +24,7 @@ func CheckAuth(c *gin.Context, database database.Database) (*database.User, erro
 		c.JSON(401, gin.H{
 			"error": "User not found",
 		})
-		return nil, err
+		return nil, errors.New("user not found")
 	}
 
 	if time.Now().After(user.Expiration) {
