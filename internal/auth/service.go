@@ -101,7 +101,7 @@ func (s Service) GetRedirect(c *gin.Context) {
 		}
 	}
 
-	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", s.FrontendURL, false, false)
+	c.SetCookie("access_token", token.AccessToken, token.ExpiresIn, "/", s.CookieDomain, false, false)
 	c.Redirect(http.StatusFound, s.FrontendURL)
 }
 
