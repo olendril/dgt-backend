@@ -20,7 +20,7 @@ func CheckAuth(c *gin.Context, database database.Database) (*database.User, erro
 	}
 
 	user, err := database.SearchUserByAccessToken(token)
-	if err == nil || user == nil {
+	if err == nil && user == nil {
 		c.JSON(401, gin.H{
 			"error": "User not found",
 		})
