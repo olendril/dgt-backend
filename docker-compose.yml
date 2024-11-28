@@ -10,6 +10,10 @@ services:
     environment:
       DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
       DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DISCORD_REDIRECT_URL: ${DISCORD_REDIRECT_URL}
+    restart: always
+
 
   db:
     image: postgres:17
@@ -22,6 +26,6 @@ services:
     environment:
       POSTGRES_DB: dgt
       POSTGRES_USER : root
-      POSTGRES_PASSWORD : root
+      POSTGRES_PASSWORD : ${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
