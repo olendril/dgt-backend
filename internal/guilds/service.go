@@ -53,13 +53,18 @@ func (s Service) PostGuilds(c *gin.Context) {
 		Code:   code.String(),
 	}
 
-	err = s.database.CreateGuild(guild)
+	guildResponse, err := s.database.CreateGuild(guild)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, nil)
+	c.JSON(200, guild_api.GuildResponse{
+		Code:   guildResponse.Code,
+		Id:     strconv.Itoa(int(guildResponse.ID)),
+		Name:   guildResponse.Name,
+		Server: guildResponse.Server,
+	})
 }
 
 func (s Service) GetGuilds(c *gin.Context) {

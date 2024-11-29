@@ -89,7 +89,7 @@ func (s Service) PostCharacters(c *gin.Context) {
 		return
 	}
 
-	if requestBody.Level < 0 || requestBody.Level > 200 {
+	if requestBody.Level < 1 || requestBody.Level > 200 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "incorrectLevel"})
 		return
 	}
@@ -99,7 +99,7 @@ func (s Service) PostCharacters(c *gin.Context) {
 		return
 	}
 
-	err = s.db.CreateCharacter(database.Character{
+	character, err := s.db.CreateCharacter(database.Character{
 		Name:            requestBody.Name,
 		Server:          requestBody.Server,
 		GuildID:         guild.ID,
@@ -114,7 +114,15 @@ func (s Service) PostCharacters(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, character_api.CharacterResponse{
+		Class:          character.Class,
+		DungeonSuccess: nil,
+		GuildId:        strconv.Itoa(int(character.GuildID)),
+		Id:             strconv.Itoa(int(character.ID)),
+		Level:          int(character.Level),
+		Name:           character.Name,
+		Server:         character.Server,
+	})
 }
 
 func (s Service) GetCharactersId(c *gin.Context, id string) {

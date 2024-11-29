@@ -18,7 +18,11 @@ paths:
         - basicAuth: []
       responses:
         '201':
-          description: Guild created
+          description: Character created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterResponse'
         '400':
           description: Bad Request
           content:

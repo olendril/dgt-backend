@@ -19,6 +19,10 @@ paths:
       responses:
         '201':
           description: Guild created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuildResponse'
         '400':
           description: Bad Request
           content:

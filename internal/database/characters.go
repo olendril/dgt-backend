@@ -20,15 +20,15 @@ type Character struct {
 	Level           uint           `json:"level"`
 }
 
-func (d *Database) CreateCharacter(character Character) error {
+func (d *Database) CreateCharacter(character Character) (*Character, error) {
 	result := d.db.Create(&character)
 
 	if result.Error != nil {
 		log.Error().Err(result.Error).Msg("Failed to create Character")
-		return errors.New("internal server error when creating Character")
+		return nil, errors.New("internal server error when creating Character")
 	}
 
-	return nil
+	return &character, nil
 }
 
 func (d *Database) UpdateCharacter(character Character) error {

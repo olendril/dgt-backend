@@ -15,15 +15,15 @@ type Guild struct {
 	Characters []Character `json:"characters"`
 }
 
-func (d *Database) CreateGuild(guild Guild) error {
+func (d *Database) CreateGuild(guild Guild) (*Guild, error) {
 	result := d.db.Create(&guild)
 
 	if result.Error != nil {
 		log.Error().Err(result.Error).Msg("Failed to create Guild")
-		return errors.New("internal server error when creating guild")
+		return nil, errors.New("internal server error when creating guild")
 	}
 
-	return nil
+	return &guild, nil
 }
 
 func (d *Database) DeleteGuild(guild Guild) error {
